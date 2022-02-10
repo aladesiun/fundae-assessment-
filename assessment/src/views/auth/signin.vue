@@ -6,7 +6,7 @@
           <div class="flex flex-col items-center justify-center  p-0 m-1 lg:mt-7">
             <div>
               <img src="../../assets/img/signin.png" class="mb-8" alt="">
-           <p class="text-4xl font-bold mb-4"><span class="text-mygreen">Welcome back!</span></p>
+           <p class="text-4xl font-bold mb-4"><span class="text-fundallgreen">Welcome back!</span></p>
             <p class="text-4xl font-bold mb-9">we miss you.</p>
             </div>
           </div>
@@ -19,24 +19,25 @@
            
              <div class="grid grid-cols-1 gap-8">
              <div class="mb-6">
-                <label for="base-input" class="block mb-2 text-sm font-medium text-mygreen dark:text-gray-300">Email or username</label>
-                <input type="text" id="base-input" class=" border border-gray-300 text-gray-900 text-sm rounded focus:ring-mygreen focus:border-mygreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringmygreen dark:focus:bordermygreen">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-fundallgreen dark:text-gray-300">Email or username</label>
+                <input type="text" id="base-input" class=" border border-gray-300 text-gray-900 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen">
             </div>
             </div>
             <div class="grid grid-cols-1 gap-8">
              <div class="mb-6">
                 <label for="base-input" class="block mb-2 text-sm font-medium text-black dark:text-gray-300">password</label>
-                <input type="password" placeholder="Enter password" id="base-input" class=" border border-gray-300 text-gray-900 text-sm rounded focus:ring-mygreen focus:border-mygreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringmygreen dark:focus:bordermygreen">
+                <input type="password" placeholder="Enter password" id="base-input" class=" border border-gray-300 text-gray-900 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen">
             </div>
             </div>
              <div class="grid grid-cols-1 gap-8">
              <div class="mb-6">
-                <input type="submit" value="Login" id="base-input" class="bg-mygreen border border-mygreen text-black text-xl rounded focus:ring-mygreen focus:border-mygreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringmygreen dark:focus:bordermygreen">
+                 
+                <input type="submit" value="Login" id="base-input" class="bg-fundallgreen border border-fundallgreen text-black text-xl rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen">
             </div>
             </div>
            
-            <p class="text-center px-12 pt-4 text-sm"> Don't have an account? <router-link to="signup" class="text-mygreen font-semibold">Register Here</router-link> </p>
-          <p class="text-center px-12 pt-3 capitalize text-sm text-gray-400"> by clicking on Login, you agree to our <span class="text-mygreen">Terms & conditions and privacy policy</span> </p>
+            <p class="text-center md:px-12 pt-4 text-sm"> Don't have an account? <router-link to="signup" class="text-fundallgreen font-semibold">Register Here</router-link> </p>
+          <p class="text-center md:px-12 pt-3 capitalize text-sm text-gray-400"> by clicking on Login, you agree to our <span class="text-fundallgreen">Terms & conditions and privacy policy</span> </p>
 
 
           </form>

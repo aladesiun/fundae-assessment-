@@ -30,14 +30,14 @@
         <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-4">
             <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                 <router-link
-                to="signup"
+                to="signin"
                 class="text-black uppercase  hover:bg-green-700 focus:ring-4  font-semibold focus:ring-green-300 hover:text-white  rounded-lg text-sm px-3 py-1.5 text-center mr-3 md:mr-0 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
                 Login
             </router-link>
             <router-link
                 to="signup"
-                class="text-black uppercase bg-mygreen hover:bg-green-700 focus:ring-4  font-bold focus:ring-green-300 hover:text-white  rounded-lg text-sm px-3 py-1.5 text-center mr-3 md:mr-0 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                class="text-black uppercase bg-fundallgreen hover:bg-green-700 focus:ring-4  font-bold focus:ring-green-300 hover:text-white  rounded-lg text-sm px-3 py-1.5 text-center mr-3 md:mr-0 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
                 sign up
             </router-link>
