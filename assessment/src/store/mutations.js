@@ -27,6 +27,10 @@ export default{
         var result =  encodeURIComponent(JSON.stringify(data));
         localStorage.setItem('user', result);
     },
+    getnewavatar(state){
+        var avatar= localStorage.getItem('newavatar');
+        state.avatar= avatar;
+    },
 
     logout(state){
         state.authenticated = false

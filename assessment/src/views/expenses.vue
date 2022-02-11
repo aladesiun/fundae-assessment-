@@ -4,13 +4,14 @@
             <div class="hero-section-left mb-5"> 
                 <img src="../assets/img/Fundall-MintGreen-Lockup.png" alt="" />
                 <div class="flex flex-col justify-center p-0 m-1 mt-10 lg:mt-7">
+
                     <div class="profile-section w-50">
                         <div class="flex md:flex-nowrap flex-wrap items-center">
                             <div class="profile-avater rounded-[18px] bg-gray-300 col w-20 mr-5 h-20 flex items-center justify-center">
-                               <form action="" class="relative">
-                                   <img :src="user.avatar" alt="" class="m-0" />
-                                    <input type="file" @change="uploadavatar" class="absolute" >
-                               </form>
+                               <div class="relative bg-white h-30">
+                                   <img :src="updated_avatar" alt="" class="m-0" />
+                                    <Avatarmodal  class="absolute -top-9 -left-10 w-20 h-30"/>
+                               </div>
                             </div>
                             <div class="col-span-2">
                                 <p class="capitalize text-2xl font-bold text-fundallblack">{{user.firstname}} {{user.lastname}}</p>
@@ -73,7 +74,7 @@
                             <input
                                 type="number"
                                 placeholder="price"
-                                v-model="price"
+                                v-model="price3"
                                 id="base-input"
                                 class="border border-gray-300 text-gray-400 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
                             />
@@ -111,7 +112,7 @@
                             <input
                                 type="number"
                                 placeholder="price"
-                                v-model="price"
+                                v-model="price2"
                                 id="base-input"
                                 class="border border-gray-300 text-gray-400 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
                             />
@@ -123,7 +124,7 @@
                             <input
                                 type="text"
                                 placeholder="Total"
-                                id="price3"
+                                :value="total_price"
                                 class="w-20 bo font-normal  border-gray-300 text-gray-400  rounded focus:ring-fundallgreen focus:border-fundallgreen block p-2.5 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
                             />
                         </div>
@@ -143,49 +144,38 @@
 <script>
 import { mapState } from 'vuex'
 import summarytable from '../components/summarytable.vue';
+import Avatarmodal from '../components/avatarmodal.vue';
 
     export default {
-  components: { summarytable },
+  components: { summarytable, Avatarmodal },
         computed:{
         ...mapState({
-            user: (state)=> state.user
+            user: (state)=> state.user,
+            newavatar:(state)=> state.avatar
         })
     },
         Data(){
             return{
-                avatar:this.user.avatar,
-                user_avatar:''
+                // avatar:this.user.avatar,
+                avatar:'',
+                price:'332',
             }
         },
         methods:{
-            uploadavatar(e){
-                console.log(e);
-            // this.$store.dispatch('post', {
-            //     endpoint: 'base/avatar',
-            //     details: avatar
-            // })
-            // .then(function (result) {
-            // console.log(result);
-            // }, function (error) {
-            // console.log(error);
-            // })
-            // this.$store.dispatch('post', {
-            //     endpoint: 'base/avatar',
-            //     details: files
-            // }).then((data) =>{
-            //   console.log(data);
-            //     this.loading = false;
-            // }).catch((error) =>{
-            //         var error_message = error.message;
-            //         this.$store.commit('setNotification',{type:2, message: error_message})
-
-            // });
-            // },
-    
-            }
+            getprofile(){
+                this.$store.dispatch('get', 'base/profile')
+                .then((data)=>
+                {
+                    var user_profile=data.data.success.data;
+                    // this.user=user_profile;
+                    console.log(user_profile);
+                })
+            },
+            
         },
-        mounted(){
+        created(){
                 this.getprofile();
+                console.log(this.newavatar+ 'avatar');
             }
 
     }
