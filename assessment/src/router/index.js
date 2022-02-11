@@ -23,7 +23,10 @@ const routes = [
   {
     path: '/expenses',
     name: 'expenses',
-    component:expenses
+    component:expenses,
+    meta:{
+      AuthRequired:true
+  }
   }
 ]
 

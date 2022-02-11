@@ -6,10 +6,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="http://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+                
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.3.3/dist/flowbite.min.css" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
-    
+    *{
+      font-family: 'Circular Std', sans-serif!important;
+
+    }
+    *::-webkit-scrollbar{
+      display: none;
+                                                
+    }
      
     </style>
   </head>
@@ -28,7 +37,8 @@
               homebg:' #FCFBFC',
               bodybg:'#E5E5E5',
               fundallblack:'#30443C',
-              fundallgray:'#F2F3F7'
+              fundallgray:'#F2F3F7',
+              red:'#ed0d12'
             }
             
           }
