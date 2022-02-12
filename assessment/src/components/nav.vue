@@ -1,6 +1,6 @@
 <template>
-  <nav class=" border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
+  <nav class=" border-gray-200 px-2 md:px-5  py-2.5 rounded dark:bg-gray-800">
+    <div class="container flex flex-wrap justify-between items-center mx-auto md:px-10 px-0">
        <router-link to="/">
        <img src="../assets/img/Fundall-MintGreen-Lockup.png" alt="">
        

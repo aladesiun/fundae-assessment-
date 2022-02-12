@@ -1,6 +1,6 @@
 <template>
     <div class="signup">
-        <div class="grid gap-3 xl:grid-cols-3 md:px-5 lg:p-5 lg:px-12">
+        <div class="grid gap-3 xl:grid-cols-3 lg:grid-cols-2 md:px-5 lg:p-5 lg:px-12">
             <div class="hero-section-left mb-5">
                 <img src="../assets/img/Fundall-MintGreen-Lockup.png" alt="" />
                 <div class="flex flex-col justify-center p-0 m-1 mt-10 lg:mt-7">
@@ -18,9 +18,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="target mt-8 mb-5">
+                    <div class="target mt-8 mb-10">
                         <p class="capitalize text-fundallblack font-normal text-lg">target monthly Expenses</p>
-                        <p class="price text-fundallblack text-3xl font-bold" v-html=" '#'+ monthly_target"></p>
+                        <p class="price text-fundallblack text-3xl font-bold" v-html=" '#'+ updated_target"></p>
                         <div class="range bg-gray-100 md:w-80 xs:w-full mt-3 rounded-lg">
                             <div class="range-loader rounded bg-fundallgreen h-full ro w-20 p-1"></div>
                         </div>
@@ -28,7 +28,7 @@
                     <summarytable />
                 </div>
             </div>
-            <div class="lg:col-span-2 w-full xl:w-[90%] ml-auto form-section px-1 lg:px-1 mr-0 bg-fundallgray rounded-lg shadow lg:px-10 py-5 px-3">
+            <div class="md:col-span-2 w-full xl:w-[90%] ml-auto form-section px-1 lg:px-1 mr-0 bg-fundallgray rounded-lg shadow lg:px-10 py-5 px-3">
                 <div class="top-header bg-white shadow p-5 rounded-lg flex relative">
                     <div>
                         <p class="text-fundallgreen text-xl font-bold">Welcome back, <span class="text-fundallblack">Babatunde</span></p>
@@ -40,6 +40,7 @@
                     <div class="grid grid-cols-4 gap-8">
                         <div class="mb-6 col-span-3 mt-4">
                             <label for="base-input" class="block mb-2 text-sm font-medium text-black dark:text-gray-300">Target monthly expenses</label>
+                           
                             <input
                                 type="text"
                                 id="base-input"
@@ -54,8 +55,10 @@
                             <input
                                 type="date"
                                 id="base-input"
+                                v-model="target_date"
                                 class="border border-gray-300 text-gray-900 font-normal text-lg rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
                             />
+                            
                         </div>
                     </div>
                     <p class="capitalize font-normal text-fundallblack text-sm mb-5">today's expenses</p>
@@ -124,38 +127,43 @@
         },
         setup() {
             const monthly_target = ref("");
+            const updated_target= ref('')
             const updated_avatar = ref("");
+            const target_date = ref("");
             const expensessForm = ref(0)
             const today_expensess=ref([])
-            const today_expense=ref({name:'', price:null})
+            const today_expense=ref({name:'', price:0})
             const total_price= ref(0);
+            const expensess_price= ref();
+            const daily_expensess= ref([]);
+            const daily_expense=ref({date:'', price:0})
+
             return {
                 monthly_target,
                 updated_avatar,
                 expensessForm,
                 today_expense,
                 today_expensess,
-                total_price
+                total_price,
+                updated_target,
+                target_date,
+                expensess_price,
+                daily_expense,
+                daily_expensess
             };
         },
 
         methods: {
             saveExpenses(){
                 let expensess = this.today_expensess;
+                localStorage.setItem('monthly_target', this.monthly_target)
+                localStorage.setItem('target_date', this.target_date)
+                localStorage.setItem('total_price', this.total_price)
 
-                 console.log(this.expensess_history);
-                if (localStorage.getItem('today_expensess')){
-                     var data= localStorage.getItem('today_expensess');
-                    data = decodeURIComponent(data);
-                    data = JSON.parse(data);
-                    var expensess_history = data
-
-                    var result =  expensess_history.push({...expensess})
-                    localStorage.setItem('today_expensess', encodeURIComponent(JSON.stringify(result)))
-                }
-                localStorage.setItem('today_expensess', result)
-
-                console.log(this.today_expensess);
+                expensess.filter(price => this.total_price+=price.price)
+                console.log(expensess);
+                window.location.href='/expenses'
+                 
             },
             expensessFormUpdate(){
                 this.today_expensess.push({...this.today_expense})
@@ -178,6 +186,13 @@
             for (let i = 0; i <= 2; i++) {
             this.expensessFormUpdate();
             }
+            this.updated_target = localStorage.getItem('monthly_target')
+            this.monthly_target =this.updated_target
+            this.updated_date = localStorage.getItem('target_date')
+            this.target_date =this.updated_date
+            this.expensess_price = localStorage.getItem('total_price')
+
+
            
            
         },
