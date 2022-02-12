@@ -5,7 +5,8 @@
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-scroll bg-white">
                         <p class="capitalize text-xs text-fundallblack m-2 font-bold">daily expenses summary</p>
-                        <table class="min-w-full divide-gray-200 table-fixed dark:divide-gray-700">
+                
+                        <table class="min-w-full divide-gray-200 table-fixed dark:divide-gray-700" :key="idx" v-for="(expense, idx) in expensess_history">
                             <thead class="bg-white dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
@@ -47,8 +48,22 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 export default {
+    setup() {
+        const expensess_history=ref()
+        return{
+            expensess_history
+        }
+    },
+    created() {
+        var data= localStorage.getItem('today_expensess');
+        data = decodeURIComponent(data);
+        data = JSON.parse(data);
+        this.expensess_history =data
+        console.log(this.expensess_history);
 
+    }
 }
 </script>
 

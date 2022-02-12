@@ -66,8 +66,7 @@ export default {
             .then(res =>{
                 const newavatar=res.data.success.url;
                 localStorage.setItem('newavatar', newavatar)
-                console.log(res);
-                console.log(res.data.success.url);
+                window.location.href='/expenses';
             })
         }
     },
