@@ -25,7 +25,7 @@
                             <div class="range-loader rounded bg-fundallgreen h-full ro w-20 p-1"></div>
                         </div>
                     </div>
-                    <summarytable />
+                    <summarytable :expensess_history="expensess_history" />
                 </div>
             </div>
             <div class="md:col-span-2 w-full xl:w-[90%] ml-auto form-section px-1 lg:px-1 mr-0 bg-fundallgray rounded-lg shadow lg:px-10 py-5 px-3">
@@ -62,7 +62,8 @@
                         </div>
                     </div>
                     <p class="capitalize font-normal text-fundallblack text-sm mb-5">today's expenses</p>
-                    <div class="grid grid-cols-5 gap-2 " :key="index" v-for="(expense, index) in today_expensess" >
+                    <div v-if="expensess_history">
+                        <div class="grid grid-cols-5 gap-2 " :key="index" v-for="(expense, index) in today_expensess"  >
                         <div class="mb-6 col-span-3">
                             
                             <input
@@ -76,6 +77,7 @@
                         </div>
                         <div class="mb-6 col-span-2">
                             <input
+                                @change="addprice"
                                 type="number"
                                 placeholder="price"
                                 v-model="expense.price"
@@ -85,6 +87,34 @@
                             />
                         </div>
                     </div>
+                    </div>
+                    <div v-else>
+                         <div class="grid grid-cols-5 gap-2 " :key="index" v-for="(expense, index) in expensess_history"  >
+                        <div class="mb-6 col-span-3">
+                            
+                            <input
+                                type="text"
+                                placeholder="Expenses"
+                                id='base-input'
+                                ref="expense_name"
+                                v-model="expense.name"
+                                class="border font-light border-gray-300 text-gray-400 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
+                            />
+                        </div>
+                        <div class="mb-6 col-span-2">
+                            <input
+                                @change="addprice"
+                                type="number"
+                                placeholder="price"
+                                v-model="expense.price"
+                                id="price"
+                                ref="expense_price"
+                                class="border border-gray-300 text-gray-400 text-sm rounded focus:ring-fundallgreen focus:border-fundallgreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
+                            />
+                        </div>
+                    </div>
+                    </div>
+                    
                    
                     <div class="total flex md:justify-between items-center">
                         <div class="counter">
@@ -132,13 +162,14 @@
             const target_date = ref("");
             const expensessForm = ref(0)
             const today_expensess=ref([])
-            const today_expense=ref({name:'', price:0})
+            const today_expense=ref({name:'', price:null})
             const total_price= ref(0);
             const expensess_price= ref();
             const daily_expensess= ref([]);
-            const daily_expense=ref({date:'', price:0})
-
-            return {
+            const daily_expense=ref()
+            const expensess_history=ref()
+            
+            return { 
                 monthly_target,
                 updated_avatar,
                 expensessForm,
@@ -149,40 +180,71 @@
                 target_date,
                 expensess_price,
                 daily_expense,
-                daily_expensess
+                daily_expensess,
+                expensess_history
             };
         },
 
         methods: {
             saveExpenses(){
                 let expensess = this.today_expensess;
+                let dailyExpense = this.daily_expense;
+                dailyExpense = {date:this.updated_date, price:this.total_price}
+                this.daily_expensess.push({...dailyExpense})
+                console.log(this.daily_expensess);
+                console.log('above is value');
+                var result =  encodeURIComponent(JSON.stringify(this.daily_expensess));
+                if (localStorage.getItem('today_expensess')) {
+                    var data = localStorage.getItem('today_expensess')
+                    data = decodeURIComponent(data);
+                    data = JSON.parse(data);
+                    var d =data
+                    console.log(data);
+                    d.push({...dailyExpense})
+                    console.log(d);
+                    var newdata= encodeURIComponent(JSON.stringify(d));
+                    console.log(newdata);
+                    localStorage.setItem('today_expensess', newdata)
+
+                }else{
+                localStorage.setItem('today_expensess', result)
+
+                }
+                console.log(result);
                 localStorage.setItem('monthly_target', this.monthly_target)
                 localStorage.setItem('target_date', this.target_date)
                 localStorage.setItem('total_price', this.total_price)
-
+              console.log(dailyExpense);
                 expensess.filter(price => this.total_price+=price.price)
                 console.log(expensess);
+                console.log(this.daily_expensess);
                 window.location.href='/expenses'
                  
             },
             expensessFormUpdate(){
                 this.today_expensess.push({...this.today_expense})
-                console.log(this.today_expensess);
-                console.log(this.today_expense);
                 this.expensessForm++
             },
-            getprofile() {
-                this.$store.dispatch("get", "base/profile").then((data) => {
-                    var user_profile = data.data.success.data;
-                    console.log(user_profile);
-                });
+          
+            addprice(){
+                let expensess = this.today_expensess;
+                let newtotal = 0
+                expensess.filter(price =>newtotal+=price.price)
+                this.total_price= newtotal
+            },
+            getExpensessHistory(){
+                var data= localStorage.getItem('today_expensess');
+                data = decodeURIComponent(data);
+                data = JSON.parse(data);
+                this.expensess_history =data
+                console.log(this.expensess_history);
             },
         },
        
         created() {
+
             this.today_expensess.filter(price => this.total_price+=price.price)
             this.updated_avatar = localStorage.getItem("newavatar");
-            this.getprofile();
             for (let i = 0; i <= 2; i++) {
             this.expensessFormUpdate();
             }
@@ -191,11 +253,12 @@
             this.updated_date = localStorage.getItem('target_date')
             this.target_date =this.updated_date
             this.expensess_price = localStorage.getItem('total_price')
-
+            this.getExpensessHistory();
 
            
            
         },
+       
     };
 </script>
 
