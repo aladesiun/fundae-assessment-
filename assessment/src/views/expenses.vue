@@ -20,7 +20,7 @@
                     </div>
                     <div class="target mt-8 mb-10">
                         <p class="capitalize text-fundallblack font-normal text-lg">target monthly Expenses</p>
-                        <p class="price text-fundallblack text-3xl font-bold" v-html=" '#'+ updated_target"></p>
+                        <p class="price text-fundallblack text-3xl font-bold" v-html=" '₦'+ updated_target"></p>
                         <div class="range bg-gray-100 md:w-80 xs:w-full mt-3 rounded-lg">
                             <div class="range-loader rounded bg-fundallgreen h-full ro w-20 p-1"></div>
                         </div>

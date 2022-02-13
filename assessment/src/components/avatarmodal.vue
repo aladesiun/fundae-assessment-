@@ -78,9 +78,7 @@ export default {
                 localStorage.setItem('newavatar', newavatar)
                 this.loading = false
                 this.$store.commit('setNotification',{type:1, message: 'success'})
-
                 window.location.href='/expenses';
-
             }).catch((error)=>{
                 this.loading = false
                 this.$store.commit('setNotification',{type:2, message: error})

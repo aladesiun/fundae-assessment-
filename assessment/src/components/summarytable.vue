@@ -1,13 +1,13 @@
 <template>
     <div class="overflow-x-scroll">
         <div class="flex flex-col w-full xs:max-w-40 xl:w-50 lg:w-[90%] min-h-10">
-            <div class="overflow-x-scroll shadow-md sm:rounded-lg">
+            <div class="overflow-x-scroll bg-white shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle">
-                    <div class="overflow-scroll bg-white min-h-[300px] relative">
+                    <div class="overflow-scroll  min-h-[300px] relative">
                         <p class="capitalize text-xs text-fundallblack m-2 font-bold p-2">daily expenses summary</p>
 
-                        <table class="min-w-full divide-gray-200 table-fixed dark:divide-gray-700" v-if="expensess_history">
-                            <thead class="bg-white dark:bg-gray-700">
+                        <table class="min-w-full m-1 divide-gray-200 table-fixed dark:divide-gray-700" v-if="expensess_history">
+                            <thead class=" dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                         Date
