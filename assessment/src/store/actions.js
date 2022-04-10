@@ -40,7 +40,7 @@ export default{
     },
     
     post(context, data){
-        return new Promise((resolve, reject) => {
+        return  new Promise((resolve, reject) => {
             axios.post(context.state.endpoint + data.endpoint, data.details, {
                 headers: { Authorization: 'Bearer ' + context.state.token,
                 }
@@ -50,7 +50,7 @@ export default{
             })
             .catch((error)=>{
                 console.log(error);
-                // context.dispatch('handleError', error);
+                context.dispatch('handleError', error);
                 reject(error);
             })
         });

@@ -46,8 +46,8 @@
                     ></path>
                 </svg>
             </button>
-                </div>    
-            </div>
+                </div>
+        </div>
 </template>
 
 <script>

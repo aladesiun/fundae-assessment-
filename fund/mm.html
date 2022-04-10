@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mm.css">
+    <link href="http://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body{
+    background-color: #E5E5E5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 35px;
+    font-family: 'Circular Std', sans-serif!important;
+}
+.main-container{
+    background: white;
+    border-radius: 25px;
+    width: 90%;
+    height: auto;
+    padding: 9px;
+    box-shadow: 0px 0px 3px #a1a1a1;
+    margin-top: 20px;
+        
+}
+.content{
+    background: #FCFBFC;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 75px;
+}
+.main-container .content header a  {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+header .signup-btn{
+    padding:  12px  10px;
+    text-align: center;
+    background-color: #4DE897;
+    border-radius:10px;
+    margin-left: 15px;
+    font-weight: 700;
+    
+}
+img{
+}
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.main-content .text-side .fund{
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 30px;
+    text-align: center;
+}
+.text-side p{
+    text-align: center;
+    margin: 0;
+}
+.main-content .text-side .mini{
+    font-size: 40px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.main-content .text-side .by{
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 60px;
+    margin-bottom: 90px;
+
+}
+@media only screen and (max-width:600px){
+    header {
+       padding: 20px 5px;
+        font-size: 15px;
+    }
+    .main-content .text-side .fund{
+        font-size: 35px;
+    }
+    .main-content .text-side .mini{
+        font-size: 30px;
+    }
+    .main-content .text-side .by{
+        font-size: 15px;
+    
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content">
+            <header>
+                <div class="logo-sec">
+                    <a href="#">
+                        <img src="./assessment/src/assets/img/Fundall-MintGreen-Lockup.png">
+                    </a>
+                </div>
+                <div class="link-sec">
+                    <a href="#" class="signin-btn">LOG IN</a>
+                    <a href="#" class="signup-btn">SIGN UP</a>
+                </div>
+            </header>
+            <div class="main-content">
+                <div class="img-side">
+                    <img src="./assessment/src/assets/img/img1.png">
+                </div>
+                <div class="text-side">
+                    <p class="fund">Fundall Expense Tracker</p>
+                    <p class="mini">Mini Project Frontend</p>
+                    <p class="by">by Babatunde Fashola</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

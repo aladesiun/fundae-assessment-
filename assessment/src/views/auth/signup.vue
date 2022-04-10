@@ -100,9 +100,8 @@ export default {
               console.log(data);
                 if(data.data.status){
                     this.$store.commit('setNotification',{type:1, message:'Registration Successful'});
-
+                    window.location.href = "/signin";
                   alert(data.data.success.message)
-                    window.location.href = '/signin';
                 }
                 this.loading = false;
             })

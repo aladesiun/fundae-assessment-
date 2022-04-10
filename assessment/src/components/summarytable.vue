@@ -1,12 +1,12 @@
 <template>
-    <div class="overflow-x-scroll">
+    <div class="overflow-scroll h-[400px] rounded">
         <div class="flex flex-col w-full xs:max-w-40 xl:w-50 lg:w-[90%] min-h-10">
             <div class="overflow-x-scroll bg-white shadow-md sm:rounded-lg">
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-scroll  min-h-[300px] relative">
                         <p class="capitalize text-xs text-fundallblack m-2 font-bold p-2">daily expenses summary</p>
 
-                        <table class="min-w-full m-1 divide-gray-200 table-fixed dark:divide-gray-700" v-if="expensess_history">
+                        <table class="min-w-full m-1 divide-gray-200 table-fixed dark:divide-gray-700 sticky top-0" v-if="expensess_history">
                             <thead class=" dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
@@ -43,8 +43,10 @@
 </template>
 
 <script>
+import newmixin from "../newmixin";
     export default {
         props: ["expensess_history"],
+        mixins:[newmixin],
         setup() {
             return {};
         },

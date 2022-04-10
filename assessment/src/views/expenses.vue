@@ -26,17 +26,19 @@
                         </div>
                     </div>
                     <summarytable :expensess_history="expensess_history" />
+              
+                   
                 </div>
             </div>
             <div class="md:col-span-2 w-full xl:w-[90%] ml-auto form-section px-1 lg:px-1 mr-0 bg-fundallgray rounded-lg shadow lg:px-10 py-5 px-3">
                 <div class="top-header bg-white shadow p-5 rounded-lg flex relative">
                     <div>
-                        <p class="text-fundallgreen text-xl font-bold">Welcome back, <span class="text-fundallblack">Babatunde</span></p>
+                        <p class="text-fundallgreen text-xl font-bold">Welcome back, <span class="text-fundallblack">{{user.firstname}}</span></p>
                         <p class="text-xs text-fundallblack">Now, let’s get your expenses for this month</p>
                     </div>
                     <img src="../assets/img/jump.png" alt="" class="absolute -top-7 right-2 md:block hidden" />
                 </div>
-                <form action="" class="px-1 md:p-5" @submit.prevent="saveExpenses">
+                <form action="" class="px-1 md:p-5" @submit.prevent="saveExpenses"> 
                     <div class="grid grid-cols-4 gap-8">
                         <div class="mb-6 col-span-3 mt-4">
                             <label for="base-input" class="block mb-2 text-sm font-medium text-black dark:text-gray-300">Target monthly expenses</label>
@@ -87,7 +89,8 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="grid grid-cols-5 gap-2" :key="index" v-for="(expense, index) in expensess_history">
+                        <div class="grid grid-cols-5 gap-2" :key="index" v-for="(expense, index) in today_expensess">
+                           
                             <div class="mb-6 col-span-3">
                                 <input
                                     type="text"
@@ -130,9 +133,10 @@
                         type="submit"
                         class="block mx-auto font-bold bg-fundallgreen border-2 mt-7 border-white text-black text-sm rounded-[15px] focus:ring-fundallgreen focus:border-fundallgreen block w-90 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ringfundallgreen dark:focus:borderfundallgreen"
                     >
-                        SAVE TODAY'S EXPENSESE
+                        SAVE TODAY'S EXPENSES
                     </button>
                 </form>
+                <Notification/>
             </div>
         </div>
     </div>
@@ -143,9 +147,10 @@
     import summarytable from "../components/summarytable.vue";
     import Avatarmodal from "../components/avatarmodal.vue";
     import { ref } from "@vue/reactivity";
+    import Notification from "../components/notification.vue";
 
     export default {
-        components: { summarytable, Avatarmodal },
+        components: { summarytable, Avatarmodal, Notification },
         computed: {
             ...mapState({
                 user: (state) => state.user,
@@ -183,6 +188,11 @@
 
         methods: {
             saveExpenses() {
+               if (this.updated_date.length == null || this.total_price <= 0 ) {
+                    this.$store.commit('setNotification',{type:2, message: "date and total price are required"})
+
+                    return
+                }
                 let expensess = this.today_expensess;
                 let dailyExpense = this.daily_expense;
                 dailyExpense = { date: this.updated_date, price: this.total_price };
@@ -216,7 +226,6 @@
             },
             expensessFormUpdate() {
                 this.today_expensess.push({ ...this.today_expense });
-                this.expensessForm++;
             },
 
             addprice() {
@@ -235,11 +244,12 @@
         },
 
         created() {
-            this.today_expensess.filter((price) => (this.total_price += price.price));
-            this.updated_avatar = localStorage.getItem("newavatar");
             for (let i = 0; i <= 2; i++) {
                 this.expensessFormUpdate();
             }
+            this.today_expensess.filter((price) => (this.total_price += price.price));
+            this.updated_avatar = localStorage.getItem("newavatar");
+            
             this.updated_target = localStorage.getItem("monthly_target");
             this.monthly_target = this.updated_target;
             this.updated_date = localStorage.getItem("target_date");
